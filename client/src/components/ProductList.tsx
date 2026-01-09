@@ -104,7 +104,7 @@ const products: ProductsType = [
   },
   {
     id: 8,
-    name: "Levi’s Classic Denim",
+    name: "Levi's Classic Denim",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     description:
@@ -116,10 +116,12 @@ const products: ProductsType = [
   },
 ];
 
+interface ProductListProps {
+  category: string;
+  params: "homepage" | "products";
+}
 
-const ProductList: React.FC<ProductListProps> = 
-({ category,params }: ProductListProps) => {
-
+const ProductList = ({ category, params }: ProductListProps) => {
   return (
     <div className="w-full">
       <Categories />

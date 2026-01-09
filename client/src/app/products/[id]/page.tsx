@@ -23,13 +23,15 @@ const product: ProductType = {
 export const generateMetadata = async ({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) => {
-  // TODO:get the product from db
+  const { id } = await params;
+  
+  // TODO: get the product from db using id
   // TEMPORARY
   return {
     title: product.name,
-    describe: product.description,
+    description: product.description,
   };
 };
 
@@ -38,12 +40,14 @@ const ProductPage = async ({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ color: string; size: string }>;
+  searchParams: Promise<{ color?: string; size?: string }>;
 }) => {
+  const { id } = await params;
   const { size, color } = await searchParams;
 
   const selectedSize = size || (product.sizes[0] as string);
   const selectedColor = color || (product.colors[0] as string);
+  
   return (
     <div className="flex flex-col gap-4 lg:flex-row md:gap-12 mt-12">
       {/* IMAGE */}
