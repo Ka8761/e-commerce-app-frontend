@@ -116,7 +116,10 @@ const products: ProductsType = [
   },
 ];
 
-const ProductList = ({ category,params }: { category: string, params:"homepage" | "products" }) => {
+
+const ProductList: React.FC<ProductListProps> = 
+({ category,params }: ProductListProps) => {
+
   return (
     <div className="w-full">
       <Categories />
