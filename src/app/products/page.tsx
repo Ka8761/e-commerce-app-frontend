@@ -6,12 +6,10 @@ interface ProductsPageProps {
   }>;
 }
 
-const ProductsPage = async ({ searchParams }: ProductsPageProps) => {
-  const params = await searchParams;
-  const category = params?.category || "";
-
+const ProductsPage = async ({ searchParams }: { searchParams: Promise<{ category?: string }> }) => {
+  const { category = "" } = await searchParams;
   return (
-    <div>
+    <div className="mt-12">
       <ProductList category={category} params="products" />
     </div>
   );

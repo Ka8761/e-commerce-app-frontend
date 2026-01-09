@@ -122,14 +122,22 @@ interface ProductListProps {
 }
 
 const ProductList = ({ category, params }: ProductListProps) => {
+  // Logic to filter products based on the URL category
+  const filteredProducts = category
+    ? products.filter((p) => p.category.toLowerCase() === category.toLowerCase())
+    : products;
   return (
     <div className="w-full">
       <Categories />
       {params === "products" && <Filter/>}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12 mt-8">
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        ) : (
+          <p className="text-gray-500">No products found in this category.</p>
+        )}
       </div>
       <Link
         href={category ? `/products/?category=${category}` : "/products"}
