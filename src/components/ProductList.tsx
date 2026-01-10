@@ -9,6 +9,7 @@ const products: ProductsType = [
   {
     id: 1,
     name: "Adidas CoreFit T-Shirt",
+    category: "T-shirts",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     description:
@@ -31,12 +32,14 @@ const products: ProductsType = [
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     price: 59.9,
     sizes: ["s", "m", "l", "xl"],
+    category: "Jackets",    
     colors: ["gray", "green"],
     images: { gray: "/products/2g.png", green: "/products/2gr.png" },
   },
   {
     id: 3,
     name: "Nike Air Essentials Pullover",
+    category: "Jackets",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     description:
@@ -52,7 +55,7 @@ const products: ProductsType = [
   },
   {
     id: 4,
-    name: "Nike Dri Flex T-Shirt",
+    name: "Nike Dri Flex T-Shirt",category: "T-shirts",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     description:
@@ -65,6 +68,7 @@ const products: ProductsType = [
   {
     id: 5,
     name: "Under Armour StormFleece",
+    category: "Jackets",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     description:
@@ -81,6 +85,7 @@ const products: ProductsType = [
   {
     id: 6,
     name: "Nike Air Max 270",
+    category: "Shoes",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     description:
@@ -93,6 +98,7 @@ const products: ProductsType = [
   {
     id: 7,
     name: "Nike Ultraboost Pulse ",
+    category: "Shoes",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     description:
@@ -105,6 +111,7 @@ const products: ProductsType = [
   {
     id: 8,
     name: "Levi's Classic Denim",
+    category: "Dresses",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     description:

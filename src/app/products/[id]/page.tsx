@@ -1,9 +1,9 @@
 import ProductInteraction from "@/components/ProductInteraction";
-import { ProductType } from "@/types";
+import { ProductsType } from "../../../types";
 import Image from "next/image";
 
 
-const products: ProductType[] = [
+const products: ProductsType = [
   {
     id: 1,
     name: "Adidas CoreFit T-Shirt",
@@ -113,12 +113,12 @@ const products: ProductType[] = [
   {
     id: 8,
     name: "Levi’s Classic Denim",
+    category: "Dresses",
     shortDescription:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     description:
       "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
     price: 59.9,
-    category: "Dresses",
     sizes: ["s", "m", "l"],
     colors: ["blue", "green"],
     images: { blue: "/products/8b.png", green: "/products/8gr.png" },
@@ -126,17 +126,18 @@ const products: ProductType[] = [
 ];
 
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params?:  Promise<{ id: string }>;
-}) => {
-   if (!params) {
-    return {
-      title: "Product",
-      description: "Product page",
-    };
+export const generateMetadata = async (
+  props: {
+    params?:  Promise<{ id: string }>;
   }
+) => {
+  const params = await props.params;
+  if (!params) {
+   return {
+     title: "Product",
+     description: "Product page",
+   };
+ }
   const id = Number(params.id);
 
   const product = products.find((p) => p.id === id);
@@ -155,16 +156,16 @@ export const generateMetadata = async ({
 };
 
 
-const ProductPage = async ({
-  params,
-  searchParams,
-}: {
-  params?: { id: string };
-  searchParams?: { color?: string; size?: string };
-}) => {
-   if (!params) {
-    return <div>Missing params</div>;
+const ProductPage = async (
+  props: {
+    params?: Promise<{ id: string }>;
+    searchParams?: Promise<{ color?: string; size?: string }>;
   }
+) => {
+  const params = await props.params;
+  if (!params) {
+   return <div>Missing params</div>;
+ }
 
   const id = Number(params.id);
 
@@ -173,7 +174,8 @@ const ProductPage = async ({
   if (!product) {
     return <div>Product not found</div>;
   }
-  const { size, color } = await searchParams;
+  const searchParamsObj = await props.searchParams;           // Await the Promise
+  const { size, color } = searchParamsObj || {};
 
   const selectedSize = size || (product.sizes[0] as string);
   const selectedColor = color || (product.colors[0] as string);
@@ -182,7 +184,7 @@ const ProductPage = async ({
       {/* IMAGE */}
       <div className="w-full lg:w-5/12 relative aspect-[2/3]">
         <Image
-          src={product.images[selectedColor]}
+          src={product.images[selectedColor as keyof typeof product.images]}
           alt={product.name}
           fill
           className="object-contain rounded-md"
